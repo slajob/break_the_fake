@@ -1,7 +1,7 @@
 import time
 from flask import Flask, jsonify, request
-
 import sqdb
+from scrap import text
 
 app = Flask(__name__)
 
@@ -14,7 +14,6 @@ def get_articles():
 @app.route('/add_article', methods=['POST'])
 def add_article():
     article_details = request.get_json()
-    # created_at = article_details["created_at"]
     created_at = time.time()
     fake_rating = article_details["fake_rating"]
     fake_rating_community = article_details["fake_rating_community"]
@@ -26,6 +25,7 @@ def add_article():
     img_url = article_details["img_url"]
     author = article_details["author"]
     url = article_details["url"]
+    print(text(url))
     result = sqdb.add_article(created_at, fake_rating, fake_rating_community, clickbait_rating,
                                             clickbait_rating_community, published_at, title, lead, img_url,
                                             author, url)

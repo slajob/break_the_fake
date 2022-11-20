@@ -3,35 +3,15 @@ import os
 
 #STT
 # HWR
-from google.cloud import vision
-import pylab as plt
 import requests
 import webbrowser
-# mowa
-import speech_recognition as sr
 import hashlib
 import io
-from pathlib import Path
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from PIL import Image
-
-
-from DeepImageSearch import Index,LoadData,SearchImage
-#TTS
-
-#import random
-import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import re
 
-#Arducam
-
-#client = vision.ImageAnnotatorClient()
-client_options = {'api_endpoint': 'eu-vision.googleapis.com'}
-# client_options = {'api_endpoint': 'eu-vision.googleapis.com', 'languageHints': 'pl-t-i0-handwrit' }
-client = vision.ImageAnnotatorClient(client_options=client_options)
 
 
 def detect_document(path,typ,detale,jsonx):
@@ -102,26 +82,6 @@ def detect_document(path,typ,detale,jsonx):
     
     return odp
 
-def rozpoznanie_mowy():
-    odp=""
-    print("wypowiedz tekst")
-    with mic as source:
-        r.adjust_for_ambient_noise(source)
-        audio = r.listen(source)
-    try:
-        odp=r.recognize_google(audio,language="pl-PL")
-        #print("Powiedziałeś: " + r.recognize_google(audio,language="pl-PL"))
-        #a=r.recognize_google(audio,language="pl-PL", show_all=True)
-        #print(a)
-    except sr.UnknownValueError:
-        #print("Nierozpoznano")
-        odp=""
-        #print("Google Speech Recognition could not understand audio")
-    except sr.RequestError as e:
-        pass
-        #print("Could not request results from Google Speech Recognition service; {0}".format(e))
-    return odp
-
 def show_similar_images_from_db(start_image_idx, n_inputs=5, n_neighbors=10):
     input_images = images[start_image_idx:start_image_idx+n_inputs]
     knn = NearestNeighbors(n_neighbors=5, metric="cosine")
@@ -163,56 +123,37 @@ def images_google(path):
     print(results)
 
 
-
 def text(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     if re.search('interia.pl', url):
         content=soup.find(class_="article-content").text
-        print(content)
         title = soup.find('title').text
         serwis="INTERIA"
-        print(title)
         desc = soup.find(class_='article-lead').text
-        print(desc)
         author = soup.find(class_='article-author-name').text
-        print(author)
         publication = soup.find(class_='article-date').text
-        print(publication)
     if re.search('wp.pl', url):
         #contenttemp=str(soup.find_all(class_="article--text"))
         #content=contenttemp.
-        print(content)
         title = soup.find('title').text
         serwis="WP.PL"
-        print(title)
         lead = soup.find(class_='article--lead').text
-        print(lead)
         author = soup.find(class_='signature--author').text
-        print(author)
         publication = soup.find(class_='signature--when d2VIX-Kh desktop').text
-        print(publication)
     if re.search('onet.pl', url):
         title = soup.find('title').text
         serwis='onet.pl'
-        print(title)
         lead = soup.find(class_='hyphenate lead').text
-        print(lead)
         author = soup.find(class_='name').text
-        print(author)
         publication = soup.find(class_='datePublished').text
-        print(publication)
     if re.search('o2.pl', url):
         title = soup.find(class_='uf3vtz-1 kFqbVU').text
-        print(title)
         serwis='o2.pl'
         lead = soup.find(class_='uf3vtz-4 iXEThf').text
-        print(lead)
         author = soup.find(class_='sc-141an0q-0 cwhzqq').text
-        print(author)
         publication = soup.find(class_='t357wt-0 bobNZX').text
-        print(publication)
-    return publication,title,lead,author#content
+    return publication, title, lead, author
     
      
 

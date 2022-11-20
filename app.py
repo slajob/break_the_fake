@@ -34,20 +34,25 @@ def add_article():
                                             author, url)
     return jsonify(result)
 
-@app.route('/review', methods=['POST'])
-def review():
+@app.route('/review_article', methods=['POST'])
+def review_article():
     article_details = request.get_json()
-    url = article_details["url"]
+    id = article_details["id"]
     fake_rating = article_details["fake_rating"]
     fake_rating_community = article_details["fake_rating_community"]
     clickbait_rating = article_details["clickbait_rating"]
     clickbait_rating_community = article_details["clickbait_rating_community"]
-
-    #text returns: publication, title, lead, author
-    # text(url)[]
+    sqdb.review_article(id, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community)
+    return True
 
 @app.route('/', methods=['GET'])
 def index():
+    id = 3
+    fake_rating = 3.6
+    fake_rating_community = 5.3
+    clickbait_rating = 3.2
+    clickbait_rating_community = 7.4
+    sqdb.review_article(id, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community)
     return 'Index page'
 
 @app.after_request

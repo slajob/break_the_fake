@@ -32,3 +32,11 @@ def get_articles():
             for row in cursor.fetchall()
         ]
     return values
+
+def review_article(id, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community):
+    db = get_db()
+    cursor = db.cursor()
+    query = f"UPDATE articles SET fake_rating = '{fake_rating}', fake_rating_community = '{fake_rating_community}', clickbait_rating = '{clickbait_rating}', clickbait_rating_community = '{clickbait_rating_community}' WHERE id = '{id}'"
+    cursor.execute(query)
+    db.commit()
+    return True

@@ -1,0 +1,11 @@
+{
+  "name": "Break The Fake",
+  "version": "1.0.0",
+  "description": "Feel safe browsing your daily news with Fake News detector",
+  "manifest_version": 3,
+  "author": "Jakub Leszczyński",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Break The Fake"
+  }
+}

@@ -26,10 +26,11 @@ class Api {
               clickbait_rating: 5.3,
               clickbait_rating_community: 2.3,
               created_at: 1668874343532,
-              description: "Lorem description",
-              title: "Lorem title",
-              fake_rating: 1.2,
-              fake_rating_community: 1.4,
+              description:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+              title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+              fake_rating: 8.2,
+              fake_rating_community: 5.4,
               id: 1,
               img_url:
                 "https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/38_afi_article1_caring-for-a-kitten-tips-for-the-first-month.png",
@@ -97,7 +98,10 @@ class Api {
     });
   };
 
-  postArticle = (): Promise<AxiosResponse<{ success: boolean }>> => {
+  postArticle = (url: string): Promise<AxiosResponse<{ success: boolean }>> => {
+    // return this.client.post("/articles", {
+    //   url: "",
+    // });
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -111,7 +115,11 @@ class Api {
     });
   };
 
-  postReview = (): Promise<AxiosResponse<{ success: boolean }>> => {
+  postReview = (input: {
+    article_id: number;
+    fake_rating: number;
+    is_clickbait: boolean;
+  }): Promise<AxiosResponse<{ success: boolean }>> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({

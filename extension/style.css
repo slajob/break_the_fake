@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 480px;
+  height: 400px;
+}
+#success,
+#failure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.title {
+  font-size: 24px;
+  color: #111111;
+  margin-top: 40px;
+}
+
+.description {
+  font-size: 16px;
+  color: #616161;
+  margin-top: 20px;
+  margin-top: 20px;
+}
+
+#score {
+  font-size: 36px;
+  color: #fbfbfb;
+  background: #0ec720;
+  width: 85px;
+  height: 85px;
+  border-radius: 30px;
+  box-shadow: inset -4px -4px 16px rgba(33, 33, 33, 0.24),
+    inset 8px 8px 24px rgba(249, 249, 249, 0.24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#btf-btn,
+#raport-btn {
+  padding: 20px;
+  background: #2d5478;
+  color: #fbfbfb;
+  cursor: pointer;
+  width: 250px;
+  text-align: center;
+  margin-top: 30px;
+}

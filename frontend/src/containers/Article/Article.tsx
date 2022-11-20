@@ -34,7 +34,7 @@ const Article: FC<ArticleProps> = () => {
           Wskaźnik prawdopodobieństwa fake newsa
         </Styled.MetricsTitle>
         <Styled.Metric>
-          <Styled.MetricTitle>Opinia użytkowników</Styled.MetricTitle>
+          <Styled.MetricTitle>Opinia ekspertów</Styled.MetricTitle>
 
           <Styled.MetricContent>
             <Styled.MetricBar percent={article.fake_rating_community * 10}>
@@ -43,17 +43,25 @@ const Article: FC<ArticleProps> = () => {
               />
             </Styled.MetricBar>
             <Styled.MetricValue>
-              {article.fake_rating_community}
+              {/* @ts-ignore */}
+              {article.fake_rating_community === "None"
+                ? "Brak opinii"
+                : article.fake_rating_community}
             </Styled.MetricValue>
           </Styled.MetricContent>
         </Styled.Metric>
         <Styled.Metric>
-          <Styled.MetricTitle>Opinia ekspertów</Styled.MetricTitle>
+          <Styled.MetricTitle>Opinia użytkownika</Styled.MetricTitle>
           <Styled.MetricContent>
             <Styled.MetricBar percent={article.fake_rating * 10}>
               <Styled.MetricBarFilled percent={article.fake_rating * 10} />
             </Styled.MetricBar>
-            <Styled.MetricValue>{article.fake_rating}</Styled.MetricValue>
+            <Styled.MetricValue>
+              {/* @ts-ignore */}
+              {article.fake_rating === "None"
+                ? "Brak opinii"
+                : article.fake_rating}
+            </Styled.MetricValue>
           </Styled.MetricContent>
         </Styled.Metric>
       </Styled.Metrics>

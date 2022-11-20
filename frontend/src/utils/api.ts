@@ -45,20 +45,14 @@ class Api {
   };
 
   postReview = (input: {
-    article_id: number;
+    id: number;
     fake_rating: number;
-    is_clickbait: boolean;
   }): Promise<AxiosResponse<{ success: boolean }>> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          data: { success: true },
-          headers: {},
-          status: 200,
-          statusText: "OK",
-          config: {},
-        });
-      }, 500);
+    return this.client.post("/review_article", {
+      fake_rating_community: null,
+      clickbait_rating: null,
+      clickbait_rating_community: null,
+      ...input,
     });
   };
 }

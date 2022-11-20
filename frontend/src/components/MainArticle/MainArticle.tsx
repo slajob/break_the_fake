@@ -42,7 +42,7 @@ const MainArticle: FC<MainArticleProps> = ({
 
   if (!article) return null;
 
-  const score = (article.fake_rating + article.fake_rating_community) / 2;
+  const score = article.fake_rating;
 
   return (
     <Styled.Wrapper isSingle={isSingle}>
@@ -65,7 +65,7 @@ const MainArticle: FC<MainArticleProps> = ({
       <Styled.Content>
         <Styled.Image isMain={isMain}>
           {/* eslint-disable-next-line */}
-          <img src={article.img_url} alt="img" style={{ width: "100%" }} />
+          <img src="/kot.jpg" alt="img" style={{ width: "80%" }} />
         </Styled.Image>
         <Styled.Right isMain={isMain}>
           {isMain && !isSingle && (

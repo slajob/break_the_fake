@@ -47,9 +47,8 @@ const Review: FC<ReviewProps> = () => {
 
   const onSend = async () => {
     await mutateAsync({
-      article_id: randomArticle.id,
+      id: randomArticle.id,
       fake_rating: lastHovered + 1,
-      is_clickbait: radioChecked === "1",
     });
   };
 

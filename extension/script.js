@@ -29,10 +29,12 @@ async function setup() {
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
     let url = tabs[0].url;
 
-    if (r.find((article) => article.url === url)) {
+    const art = r.find((article) => article.url === url);
+
+    if (art) {
       success();
       document.getElementById("score").innerHTML =
-        (r.fake_rating + article.fake_rating_community) / 2;
+        art.fake_rating === "None" ? 0 : art.fake_rating;
     } else {
       failure();
     }

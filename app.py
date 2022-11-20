@@ -43,7 +43,7 @@ def review_article():
     clickbait_rating = article_details["clickbait_rating"]
     clickbait_rating_community = article_details["clickbait_rating_community"]
     sqdb.review_article(id, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community)
-    return True
+    return "reviewed"
 
 @app.route('/', methods=['GET'])
 def index():

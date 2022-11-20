@@ -34,10 +34,29 @@ def add_article():
                                             author, url)
     return jsonify(result)
 
+@app.route('/review', methods=['POST'])
+def review():
+    article_details = request.get_json()
+    url = article_details["url"]
+    fake_rating = article_details["fake_rating"]
+    fake_rating_community = article_details["fake_rating_community"]
+    clickbait_rating = article_details["clickbait_rating"]
+    clickbait_rating_community = article_details["clickbait_rating_community"]
+
+    #text returns: publication, title, lead, author
+    # text(url)[]
+
 @app.route('/', methods=['GET'])
 def index():
     return 'Index page'
 
+@app.after_request
+def after_request(response):
+    response.headers["Access-Control-Allow-Origin"] = "*" # <- You can change "*" for a domain for example "http://localhost"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, PUT, DELETE"
+    response.headers["Access-Control-Allow-Headers"] = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

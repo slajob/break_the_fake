@@ -11,8 +11,8 @@ def get_articles():
     articles = sqdb.get_articles()
     return jsonify(articles)
 
-@app.route('/insert_article', methods=['POST'])
-def article_post():
+@app.route('/add_article', methods=['POST'])
+def add_article():
     article_details = request.get_json()
     created_at = article_details["created_at"]
     fake_rating = article_details["fake_rating"]
@@ -21,14 +21,24 @@ def article_post():
     clickbait_rating_community = article_details["clickbait_rating_community"]
     published_at = article_details["published_at"]
     title = article_details["title"]
-    description = article_details["description"]
+    lead = article_details["lead"]
     img_url = article_details["img_url"]
     author = article_details["author"]
     url = article_details["url"]
-    result = sqdb.insert_article(created_at, fake_rating, fake_rating_community, clickbait_rating,
-                                            clickbait_rating_community, published_at, title, description, img_url,
+    result = sqdb.add_article(created_at, fake_rating, fake_rating_community, clickbait_rating,
+                                            clickbait_rating_community, published_at, title, lead, img_url,
                                             author, url)
     return jsonify(result)
+
+# @app.route("/update_article/<id>", methods=["PUT"])
+# def update_game(id):
+#     article_details = request.get_json()
+#     id = game_details["id"]
+#     name = game_details["name"]
+#     price = game_details["price"]
+#     rate = game_details["rate"]
+#     result = game_controller.update_game(id, name, price, rate)
+#     return jsonify(result)
 
 @app.route('/', methods=['GET'])
 def index():

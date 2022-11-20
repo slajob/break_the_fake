@@ -18,6 +18,7 @@
 
     "review_data":
     {
+
       "other_img_urls": "https://webkit.org/demos/srcset/image-1x.png",
       "hate_speech_detected": true
     }

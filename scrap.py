@@ -134,8 +134,8 @@ def text(url):
         author = soup.find(class_='article-author-name').text
         publication = soup.find(class_='article-date').text
     if re.search('wp.pl', url):
-        #contenttemp=str(soup.find_all(class_="article--text"))
-        #content=contenttemp.
+        contenttemp=str(soup.find_all(class_="article--text"))
+        content=soup.find(any).text
         title = soup.find('title').text
         serwis="WP.PL"
         lead = soup.find(class_='article--lead').text
@@ -143,17 +143,19 @@ def text(url):
         publication = soup.find(class_='signature--when d2VIX-Kh desktop').text
     if re.search('onet.pl', url):
         title = soup.find('title').text
+        content=soup.find(class_="detailContent").text
         serwis='onet.pl'
         lead = soup.find(class_='hyphenate lead').text
         author = soup.find(class_='name').text
         publication = soup.find(class_='datePublished').text
     if re.search('o2.pl', url):
         title = soup.find(class_='uf3vtz-1 kFqbVU').text
+        content=soup.find('article').text
         serwis='o2.pl'
         lead = soup.find(class_='uf3vtz-4 iXEThf').text
         author = soup.find(class_='sc-141an0q-0 cwhzqq').text
         publication = soup.find(class_='t357wt-0 bobNZX').text
-    return publication, title, lead, author
+    return publication, title, lead, author, content
     
      
 
@@ -172,6 +174,6 @@ if __name__ == '__main__':
     url2="https://wiadomosci.wp.pl/idzie-kryzys-dudek-nie-bedzie-oszczednosci-bez-ograniczenia-programow-spolecznych-6835377261013664a"
     url3="https://wiadomosci.onet.pl/tylko-w-onecie/polka-odwiedzila-rosje-i-nie-ma-zludzen-zachod-widzi-to-co-chce-widziec/8vxwvxp"
     url4="https://www.o2.pl/biznes/ludzie-przecieraja-oczy-na-jarmarku-w-gdansku-cena-grochowki-szokuje-6835661165365952a"
-    text(url2)
+    text(url4)
     #odp=detect_document("/shopping.png",typ_analizy,detale_analizy,pokaz_json)
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

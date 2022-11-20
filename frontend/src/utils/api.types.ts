@@ -9,8 +9,7 @@ export type Article = {
   fake_rating: number; // 1-10 average
   fake_rating_community: number;
 
-  clickbait_rating: number; // 1-10;
-  clickbait_rating_community: number; // 1-10;
+  is_clickbait: boolean;
 
   published_at: Timestamp;
   title: string;
@@ -26,12 +25,17 @@ export type Article = {
   };
 };
 
+// POST /articles
+export type Input = {
+  url: string;
+};
+
 // POST /review
 export type Review = {
   // id: number;
   article_id: number;
   fake_rating: number; // 1-10
-  clickbait_rating: number; // 1-10
+  is_clickbait: boolean;
   // ...
 };
 

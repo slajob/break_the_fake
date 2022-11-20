@@ -1,4 +1,4 @@
-import json
+import time
 from flask import Flask, jsonify, request
 
 import sqdb
@@ -14,7 +14,8 @@ def get_articles():
 @app.route('/add_article', methods=['POST'])
 def add_article():
     article_details = request.get_json()
-    created_at = article_details["created_at"]
+    # created_at = article_details["created_at"]
+    created_at = time.time()
     fake_rating = article_details["fake_rating"]
     fake_rating_community = article_details["fake_rating_community"]
     clickbait_rating = article_details["clickbait_rating"]

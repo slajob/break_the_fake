@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { FC, memo } from "react";
+import { FC, memo, useEffect } from "react";
+import MainArticle from "../../components/MainArticle/MainArticle";
+import api from "../../utils/api";
 import { useArticles } from "../../utils/queries";
 
 import * as Styled from "./Home.styles";
@@ -11,26 +13,20 @@ const Home: FC<HomeProps> = () => {
 
   if (isLoading) return null;
 
+  const [mainArticle, ...remainingArticles] = articles?.data || [];
+
   return (
     <Styled.Wrapper>
       <Styled.ArticleList>
-        {articles?.data?.map((article) => (
-          <Styled.Article key={article.id}>
-            <div>Tytuł: {article.title}</div>
-            <div>Autor: {article.author}</div>
-            <div>Clickbait: {article.clickbait_rating}</div>
-            <div>
-              Clickbait społeczność: {article.clickbait_rating_community}
-            </div>
-            <div>Tekst: {article.description}</div>
-            <div>Fake: {article.fake_rating}</div>
-            <div>Fake społeczność: {article.fake_rating_community}</div>
-            <div>
-              Obrazek: {/* eslint-disable-next-line */}
-              <img src={article.img_url} alt="Img" width="100" height="100" />
-            </div>
-            <div>{new Date(article.published_at).toISOString()}</div>
-          </Styled.Article>
+        <MainArticle article={mainArticle} isMain />
+        <Styled.RemainingWrapper>
+          <Styled.RemainingWrapperTitle>
+            Wszystkie artykuły
+          </Styled.RemainingWrapperTitle>
+          <Styled.FilterButton>Filtruj</Styled.FilterButton>
+        </Styled.RemainingWrapper>
+        {remainingArticles.map((article) => (
+          <MainArticle article={article} key={article.id} />
         ))}
       </Styled.ArticleList>
     </Styled.Wrapper>

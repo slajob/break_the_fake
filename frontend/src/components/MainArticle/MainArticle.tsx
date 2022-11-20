@@ -40,6 +40,8 @@ const MainArticle: FC<MainArticleProps> = ({
     router.push(`/article/${article.id}`);
   };
 
+  if (!article) return null;
+
   const score = (article.fake_rating + article.fake_rating_community) / 2;
 
   return (
@@ -87,7 +89,7 @@ const MainArticle: FC<MainArticleProps> = ({
             <Styled.InfoText>
               <Styled.InfoTextLabel>opublikowano:</Styled.InfoTextLabel>
               <Styled.InfoTextValue>
-                {formatDate(article.published_at)}
+                {String(article.published_at).split(",")[1]}
               </Styled.InfoTextValue>
             </Styled.InfoText>
           </Styled.Info>
@@ -96,12 +98,13 @@ const MainArticle: FC<MainArticleProps> = ({
               <Styled.ArticleTitle>{article.title}</Styled.ArticleTitle>
               <Styled.Summary>{article.description}</Styled.Summary>
             </Styled.Text>
-            {!isSingle && (
+            {!isSingle && !!score && (
               <Styled.Score value={Math.round(score)}>
                 {score.toFixed(1)}
               </Styled.Score>
             )}
           </Styled.Texts>
+          \
           <Styled.Buttons>
             <Styled.SecondaryButton onClick={handleArticleButtonClick}>
               Artykuł

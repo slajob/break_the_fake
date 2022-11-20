@@ -23,8 +23,19 @@ async function setup() {
   const btn2 = document.querySelector("#btf-btn");
   btn2.addEventListener("click", btnBtn);
 
-  // fetch
-  // success();
-  // failure();
+  const response = await fetch("http://localhost:8000/articles");
+  const r = await response.json();
+
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+    let url = tabs[0].url;
+
+    if (r.find((article) => article.url === url)) {
+      success();
+      document.getElementById("score").innerHTML =
+        (r.fake_rating + article.fake_rating_community) / 2;
+    } else {
+      failure();
+    }
+  });
 }
 window.onload = setup;

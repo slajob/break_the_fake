@@ -26,7 +26,10 @@ const Menu: FC<MenuProps> = () => {
   return (
     <Styled.Wrapper>
       <Styled.Top>
-        <Styled.Logo>LOGO</Styled.Logo>
+        <Styled.Logo>
+          {/* eslint-disable-next-line */}
+          <img src="/logo.png" width="100" alt="logo" />
+        </Styled.Logo>
         <Styled.Search>
           <Styled.Input
             placeholder="Wklej link do artykułu"

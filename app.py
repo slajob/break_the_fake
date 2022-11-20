@@ -30,16 +30,6 @@ def add_article():
                                             author, url)
     return jsonify(result)
 
-# @app.route("/update_article/<id>", methods=["PUT"])
-# def update_game(id):
-#     article_details = request.get_json()
-#     id = game_details["id"]
-#     name = game_details["name"]
-#     price = game_details["price"]
-#     rate = game_details["rate"]
-#     result = game_controller.update_game(id, name, price, rate)
-#     return jsonify(result)
-
 @app.route('/', methods=['GET'])
 def index():
     return 'Index page'

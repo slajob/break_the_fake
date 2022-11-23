@@ -123,25 +123,35 @@ def images_google(path):
     print(results)
 
 
+CLEANR = re.compile('<.*?>') 
+
+def cleanhtml(raw_html):
+  cleantext = re.sub(CLEANR, '', raw_html)
+  return cleantext
+
 def text(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     if re.search('interia.pl', url):
+        img_src=soup.find(class_='img-responsive')['src']
         content=soup.find(class_="article-content").text
         title = soup.find('title').text
         serwis="INTERIA"
-        desc = soup.find(class_='article-lead').text
+        lead = soup.find(class_='article-lead').text
         author = soup.find(class_='article-author-name').text
         publication = soup.find(class_='article-date').text
     if re.search('wp.pl', url):
+        img_src=soup.find(class_='d2M9GK-e')['src']
         contenttemp=str(soup.find_all(class_="article--text"))
-        content=soup.find(any).text
+        content=cleanhtml(contenttemp)
         title = soup.find('title').text
         serwis="WP.PL"
         lead = soup.find(class_='article--lead').text
         author = soup.find(class_='signature--author').text
         publication = soup.find(class_='signature--when d2VIX-Kh desktop').text
     if re.search('onet.pl', url):
+        img_temp=soup.find('picture')
+        img_src=img_temp.find('img')['src']
         title = soup.find('title').text
         content=soup.find(class_="detailContent").text
         serwis='onet.pl'
@@ -149,16 +159,15 @@ def text(url):
         author = soup.find(class_='name').text
         publication = soup.find(class_='datePublished').text
     if re.search('o2.pl', url):
-        title = soup.find(class_='uf3vtz-1 kFqbVU').text
+        img_src=soup.find('img', class_='sc-ah7wm2-3 iZStgW')['src']
+        title = soup.find(class_='sc-1mskw74-0 sc-7eqdwf-0 cYcZJb').text
         content=soup.find('article').text
         serwis='o2.pl'
-        lead = soup.find(class_='uf3vtz-4 iXEThf').text
-        author = soup.find(class_='sc-141an0q-0 cwhzqq').text
-        publication = soup.find(class_='t357wt-0 bobNZX').text
-    return publication, title, lead, author, content
+        lead = soup.find(class_='sc-1mskw74-0 sc-7eqdwf-0 sc-24u8x8-0 cTKBPX').text
+        author = soup.find(class_='sc-1mskw74-0 sc-7eqdwf-0 ihSKrH sc-6fk6fo-0 eLtABC').text
+        publication = soup.find('time').text
+    return publication, title, lead, author, content, serwis, img_src
     
-     
-
 
 
 # Press the green button in the gutter to run the script.
@@ -169,6 +178,7 @@ if __name__ == '__main__':
     typ_analizy= "obiekty_sceny"
     print("")
     images_google('/shopping.png')
+    print("")
 
     url="https://wydarzenia.interia.pl/raporty/raport-ukraina-rosja/aktualnosci/news-przewodow-pogrzeb-pierwszej-ofiary-wybuchu-rakiety,nId,6421383?parametr=zobacz_takze"
     url2="https://wiadomosci.wp.pl/idzie-kryzys-dudek-nie-bedzie-oszczednosci-bez-ograniczenia-programow-spolecznych-6835377261013664a"

@@ -1,42 +1,48 @@
 import sqlite3
 
-DATABASE = "break_the_fake.db"
 
+class Database:
+    def __init__(self, database_name):
+        self.connectdb = sqlite3.connect(database_name)
+        self.cursor = self.connectdb.cursor()
 
-def get_db():
-    conn = sqlite3.connect(DATABASE)
-    return conn
+    def __del__(self):
+        self.connectdb.close()
+
+global database_name
+database_name = "break_the_fake.db"
 
 
 def add_article(created_at, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community,
                 published_at, title, lead, img_url, author, url):
-    db = get_db()
-    cursor = db.cursor()
-    cmd = "INSERT INTO articles(created_at, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community,published_at, title, lead, img_url, author, url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    cursor.execute(cmd, [created_at, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community,
-                         published_at, title, lead, img_url, author, url])
-    db.commit()
+    db = Database(database_name)
+    query = "INSERT INTO articles(created_at, fake_rating, fake_rating_community, clickbait_rating, " \
+            "clickbait_rating_community,published_at, title, lead, img_url, author, url) " \
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    db.cursor.execute(query, [created_at, fake_rating, fake_rating_community, clickbait_rating,
+                              clickbait_rating_community, published_at, title, lead, img_url, author, url])
+    db.connectdb.commit()
     return True
 
 
 def get_articles():
-    db = get_db()
-    cursor = db.cursor()
+    db = Database(database_name)
     query = "SELECT * FROM articles"
-    cursor.execute(query)
-
+    db.cursor.execute(query)
     values = [
-            dict(id=row[0], created_at=row[1], fake_rating=row[2], fake_rating_community=row[3], clickbait_rating=row[4],
-                 clickbait_rating_community=row[5], published_at=row[6], title=row[7], lead=row[8], img_url=row[9],
-                 author=row[10], url=row[11])
-            for row in cursor.fetchall()
+            dict(id=row[0], created_at=row[1], fake_rating=row[2], fake_rating_community=row[3],
+                 clickbait_rating=row[4], clickbait_rating_community=row[5], published_at=row[6], title=row[7],
+                 lead=row[8], img_url=row[9], author=row[10], url=row[11])
+            for row in db.cursor.fetchall()
         ]
     return values
 
+
 def review_article(id, fake_rating, fake_rating_community, clickbait_rating, clickbait_rating_community):
-    db = get_db()
-    cursor = db.cursor()
-    query = f"UPDATE articles SET fake_rating = '{fake_rating}', fake_rating_community = '{fake_rating_community}', clickbait_rating = '{clickbait_rating}', clickbait_rating_community = '{clickbait_rating_community}' WHERE id = '{id}'"
-    cursor.execute(query)
-    db.commit()
+    db = Database(database_name)
+    query = f"UPDATE articles SET fake_rating = '{fake_rating}', fake_rating_community = '{fake_rating_community}'," \
+            f" clickbait_rating = '{clickbait_rating}', clickbait_rating_community = '{clickbait_rating_community}' " \
+            f"WHERE id = '{id}'"
+    db.cursor.execute(query)
+    db.connectdb.commit()
     return True

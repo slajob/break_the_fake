@@ -17,5 +17,16 @@ everyone. This newspaper was written specificaly for you and contains real, veri
   - [@jakub-leszczynski](https://github.com/jakub-leszczynski) <img src="https://badges.aleen42.com/src/javascript.svg"> <img src="https://badgen.net/badge/Frontend/Frontend/green">
   - Marta Siniarska <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/figma_badge.svg" alt="drawing" style="width:75px;"/> <img src="https://badgen.net/badge/%55%58%2F%55%49/Design/green">
 
+## Presentation & Design
 
+<p align="center">
+    <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/articles.png">
+    
+<p align="center">
+<img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/review.png">
 
+<p align="center">
+    <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/result.png">
+    
+<p align="center">
+    <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/extension.png">

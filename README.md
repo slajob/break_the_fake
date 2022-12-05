@@ -29,4 +29,4 @@ everyone. This newspaper was written specificaly for you and contains real, veri
     <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/result.png">
     
 <p align="center">
-    <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/extension.png">
+    <img src="https://github.com/slajob/break_the_fake/blob/main/frontend/public/extension2.png">
